@@ -6,9 +6,9 @@ Echo's built-in web view. A server on your PC only delivers the files (about 4.5
 requests. Started with "Alexa, open Doom" / "Alexa, öffne Doom" (the skill has all 17 Alexa locales, see [Languages](#languages)).
 No jailbreak, only official means. A fun and blog project, development mode only, not for the skill store.
 
-**Status: step 4 of 5.** Doom runs on the Echo Show via the skill, with multitouch controls and an FPS/CPU
+**Status:** Doom runs on the Echo Show via the skill, with multitouch controls and an FPS/CPU
 overlay that reports to the server console, and sound effects. Keyboard works on the desktop. No music.
-The feasibility probe from step 1 is still available (`--page /probe/`), see [Probe results](#probe-results-step-1).
+The feasibility probe (checks the Echo before running Doom) is still available (`--page /probe/`), see [Probe results](#probe-results).
 
 ```
 "Alexa, open Doom"
@@ -88,7 +88,7 @@ automatically on touch screens; `?touch=1` forces them on a desktop, `?touch=0` 
 The overlay (top left) shows fps, CPU time per `tickGame` call (game logic + rendering + copy to canvas) and the
 load time. Hide it with `?hud=0`.
 
-## Run the feasibility probe (step 1)
+## Run the feasibility probe
 
 Add `--page /probe/` to the start command, e.g. `.\start.cmd --tunnel --tunnel-protocol http2 --page /probe/`.
 
@@ -154,7 +154,7 @@ The shareware `doom1.wad` (v1.9, MD5 `f0cefca49926d00903cf57551d901abe`) is embe
 It is not GPL; it is distributed under id Software's shareware terms, see
 [public/doom/doom1.wad-LICENSE.txt](public/doom/doom1.wad-LICENSE.txt).
 
-## Probe results (step 1)
+## Probe results
 
 On the author's Echo Show (UA `Android 5.1.1; AEOBP … Chrome/108`, Intel Atom x5/x7, 4 cores, 1280×800):
 WebAssembly works (incl. `instantiateStreaming` and SIMD), 64/128/256 MB of WASM memory can be allocated,

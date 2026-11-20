@@ -87,7 +87,7 @@ var imports = {
   gameSaving: { sizeOfSaveGame: function () { return 0; }, readSaveGame: function () { return 0; }, writeSaveGame: function () { return 0; } },
 };
 
-// ---------- Input (keyboard for the desktop; touch controls come in step 4) ----------
+// ---------- Input (keyboard for the desktop; touch controls are in touch.js) ----------
 var doom = null;
 var keyMap = null;
 function doomKey(e) {
