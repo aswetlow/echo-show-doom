@@ -1,0 +1,134 @@
+diff --git a/Makefile b/Makefile
+index dadaf61..c3470da 100644
+--- a/Makefile
++++ b/Makefile
+@@ -169,7 +169,7 @@ OUTPUT_UTIL_WASM_MODULES = $(OUTPUT_DIR)/util-wasm-modules
+ FILE_EMBEDDED_IN_CODE_DIR = $(OUTPUT_DIR)/file_embedded_in_code
+ FILE_EMBEDDED_IN_CODE_OUTPUT_DIR = $(FILE_EMBEDDED_IN_CODE_DIR)/$(OUTPUT_DIR)
+ 
+-SRC_DOOM = dummy.c am_map.c doomdef.c doomstat.c dstrings.c d_event.c d_items.c d_iwad.c d_loop.c d_main.c d_mode.c d_net.c f_finale.c f_wipe.c g_game.c hu_lib.c hu_stuff.c info.c i_cdmus.c i_endoom.c i_joystick.c i_scale.c i_sound.c i_system.c i_timer.c memio.c m_argv.c m_bbox.c m_cheat.c m_config.c m_controls.c m_fixed.c m_menu.c m_misc.c m_random.c p_ceilng.c p_doors.c p_enemy.c p_floor.c p_inter.c p_lights.c p_map.c p_maputl.c p_mobj.c p_plats.c p_pspr.c p_saveg.c p_setup.c p_sight.c p_spec.c p_switch.c p_telept.c p_tick.c p_user.c r_bsp.c r_data.c r_draw.c r_main.c r_plane.c r_segs.c r_sky.c r_things.c sha1.c sounds.c statdump.c st_lib.c st_stuff.c s_sound.c tables.c v_video.c wi_stuff.c w_checksum.c w_file.c w_wad.c z_zone.c i_input.c i_video.c doomgeneric.c
++SRC_DOOM = dummy.c am_map.c doomdef.c doomstat.c dstrings.c d_event.c d_items.c d_iwad.c d_loop.c d_main.c d_mode.c d_net.c f_finale.c f_wipe.c g_game.c hu_lib.c hu_stuff.c info.c i_cdmus.c i_endoom.c i_joystick.c i_scale.c i_sound.c i_system.c i_timer.c memio.c m_argv.c m_bbox.c m_cheat.c m_config.c m_controls.c m_fixed.c m_menu.c m_misc.c m_random.c p_ceilng.c p_doors.c p_enemy.c p_floor.c p_inter.c p_lights.c p_map.c p_maputl.c p_mobj.c p_plats.c p_pspr.c p_saveg.c p_setup.c p_sight.c p_spec.c p_switch.c p_telept.c p_tick.c p_user.c r_bsp.c r_data.c r_draw.c r_main.c r_plane.c r_segs.c r_sky.c r_things.c sha1.c sounds.c statdump.c st_lib.c st_stuff.c s_sound.c tables.c v_video.c wi_stuff.c w_checksum.c w_file.c w_wad.c z_zone.c i_input.c i_video.c doomgeneric.c i_wasmsound.c
+ SRC_DOOM_WASM_SPECIFIC = doom_wasm.c internal__wasi-snapshot-preview1.c
+ EMBEDDED_BINARY_FILES = DOOM1.WAD
+ SRC_FOR_EMBEDDED_FILES = $(addprefix $(FILE_EMBEDDED_IN_CODE_DIR)/, $(addsuffix .c, $(EMBEDDED_BINARY_FILES)))
+diff --git a/doomgeneric/src/i_sound.c b/doomgeneric/src/i_sound.c
+index c113e1b..b7f5244 100644
+--- a/doomgeneric/src/i_sound.c
++++ b/doomgeneric/src/i_sound.c
+@@ -65,6 +65,7 @@ extern sound_module_t *DG_sound_module;
+ extern music_module_t *DG_music_module;
+ #endif
+ extern sound_module_t sound_pcsound_module;
++extern sound_module_t sound_wasm_module; // echo-show-doom: i_wasmsound.c
+ extern music_module_t music_opl_module;
+ 
+ // For OPL module:
+@@ -90,6 +91,7 @@ static sound_module_t *sound_modules[] = {
+ #ifdef FEATURE_SOUND
+     &DG_sound_module,
+ #endif
++    &sound_wasm_module, // echo-show-doom
+     NULL,
+ };
+ 
+diff --git a/doomgeneric/src/i_wasmsound.c b/doomgeneric/src/i_wasmsound.c
+new file mode 100644
+index 0000000..35dd4e2
+--- /dev/null
++++ b/doomgeneric/src/i_wasmsound.c
+@@ -0,0 +1,95 @@
++//
++// echo-show-doom: sound effects for doom.wasm.
++//
++// Doom's sound code (s_sound.c) decides which effect to play, on which of its channels, with which
++// volume and stereo separation. This module hands that to the host (JavaScript) through four imports
++// in the "sound" import module. The host decodes the raw DMX lump and plays it with Web Audio.
++// Music is not implemented.
++//
++// License: GPL-2.0-or-later, like the rest of Doom.
++//
++
++#include "doomtype.h"
++#include "i_sound.h"
++#include "m_misc.h"
++#include "w_wad.h"
++#include "z_zone.h"
++#include "deh_str.h"
++
++#define SOUND_IMPORT(name) __attribute__((import_module("sound"), import_name(name)))
++
++// Start effect `lumpnum` (raw DMX lump at data/length) on `channel`. vol 0..127, sep 0..254 (128 = centre).
++SOUND_IMPORT("startSfx") void host_startSfx(int channel, int lumpnum, const byte *data, int length, int vol, int sep);
++SOUND_IMPORT("stopSfx") void host_stopSfx(int channel);
++SOUND_IMPORT("updateSfx") void host_updateSfx(int channel, int vol, int sep);
++SOUND_IMPORT("isPlaying") int host_isPlaying(int channel);
++
++static boolean use_sfx_prefix;
++
++static snddevice_t sound_wasm_devices[] = {
++    SNDDEVICE_SB, SNDDEVICE_PAS, SNDDEVICE_GUS, SNDDEVICE_WAVEBLASTER, SNDDEVICE_SOUNDCANVAS, SNDDEVICE_AWE32,
++};
++
++static boolean I_Wasm_InitSound(boolean _use_sfx_prefix) {
++  use_sfx_prefix = _use_sfx_prefix;
++  return true;
++}
++
++static void I_Wasm_ShutdownSound(void) {}
++
++static int I_Wasm_GetSfxLumpNum(sfxinfo_t *sfx) {
++  char namebuf[9];
++
++  if (sfx->link != NULL) {
++    sfx = sfx->link;
++  }
++  if (use_sfx_prefix) {
++    M_snprintf(namebuf, sizeof(namebuf), "ds%s", DEH_String(sfx->name));
++  } else {
++    M_StringCopy(namebuf, DEH_String(sfx->name), sizeof(namebuf));
++  }
++  // W_CheckNumForName instead of W_GetNumForName: a missing sound must not end the game.
++  return W_CheckNumForName(namebuf);
++}
++
++static void I_Wasm_UpdateSound(void) {}
++
++static void I_Wasm_UpdateSoundParams(int channel, int vol, int sep) {
++  host_updateSfx(channel, vol, sep);
++}
++
++static int I_Wasm_StartSound(sfxinfo_t *sfx, int channel, int vol, int sep) {
++  int lumpnum = sfx->lumpnum;
++
++  if (lumpnum < 0) {
++    return -1;
++  }
++  // The lump stays cached in the zone, so the pointer is valid while the host decodes it.
++  byte *data = W_CacheLumpNum(lumpnum, PU_STATIC);
++  host_startSfx(channel, lumpnum, data, W_LumpLength(lumpnum), vol, sep);
++  return channel;
++}
++
++static void I_Wasm_StopSound(int channel) {
++  host_stopSfx(channel);
++}
++
++static boolean I_Wasm_SoundIsPlaying(int channel) {
++  return host_isPlaying(channel) != 0;
++}
++
++static void I_Wasm_PrecacheSounds(sfxinfo_t *sounds, int num_sounds) {}
++
++sound_module_t sound_wasm_module = {
++    sound_wasm_devices,
++    arrlen(sound_wasm_devices),
++    I_Wasm_InitSound,
++    I_Wasm_ShutdownSound,
++    I_Wasm_GetSfxLumpNum,
++    I_Wasm_UpdateSound,
++    I_Wasm_UpdateSoundParams,
++    I_Wasm_StartSound,
++    I_Wasm_StopSound,
++    I_Wasm_SoundIsPlaying,
++    I_Wasm_PrecacheSounds,
++};

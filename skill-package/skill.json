@@ -1,0 +1,44 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "de-DE": {
+          "name": "Doom",
+          "summary": "Doom (Shareware) als WebAssembly auf dem Echo Show.",
+          "description": "Spaß- und Blogprojekt: Doom läuft als WebAssembly im Web-API-for-Games-Webview. Nur für den Entwicklungsmodus.",
+          "examplePhrases": ["Alexa, öffne Doom"],
+          "keywords": []
+        },
+        "en-US": {
+          "name": "Doom",
+          "summary": "Doom (shareware) as WebAssembly on the Echo Show.",
+          "description": "Fun and blog project: Doom runs as WebAssembly in the Web API for Games web view. Development mode only.",
+          "examplePhrases": ["Alexa, open Doom"],
+          "keywords": []
+        },
+        "en-GB": {
+          "name": "Doom",
+          "summary": "Doom (shareware) as WebAssembly on the Echo Show.",
+          "description": "Fun and blog project: Doom runs as WebAssembly in the Web API for Games web view. Development mode only.",
+          "examplePhrases": ["Alexa, open Doom"],
+          "keywords": []
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Development mode only.",
+      "category": "GAMES"
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "https://YOUR-TUNNEL.trycloudflare.com/alexa",
+          "sslCertificateType": "Wildcard"
+        },
+        "interfaces": [
+          { "type": "ALEXA_PRESENTATION_HTML" }
+        ]
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}

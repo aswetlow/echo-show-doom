@@ -1,0 +1,8 @@
+# ASK CLI state: skill id and account binding, per developer
+.ask/
+**/.ask/
+# probe results (contain your device's user agent etc.)
+reports/
+node_modules/
+*.log
+.build/

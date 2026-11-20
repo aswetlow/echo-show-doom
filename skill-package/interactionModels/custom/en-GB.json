@@ -1,0 +1,16 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "doom",
+      "intents": [
+        { "name": "StartGameIntent", "slots": [], "samples": ["start the game", "play", "start doom", "run the test", "lets go"] },
+        { "name": "AMAZON.StopIntent", "samples": [] },
+        { "name": "AMAZON.CancelIntent", "samples": [] },
+        { "name": "AMAZON.HelpIntent", "samples": [] },
+        { "name": "AMAZON.NavigateHomeIntent", "samples": [] },
+        { "name": "AMAZON.FallbackIntent", "samples": [] }
+      ],
+      "types": []
+    }
+  }
+}
