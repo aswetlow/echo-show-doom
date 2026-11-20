@@ -3,12 +3,37 @@
     "languageModel": {
       "invocationName": "doom",
       "intents": [
-        { "name": "StartGameIntent", "slots": [], "samples": ["starte das spiel", "spiel starten", "starte doom", "los geht es", "test starten"] },
-        { "name": "AMAZON.StopIntent", "samples": [] },
-        { "name": "AMAZON.CancelIntent", "samples": [] },
-        { "name": "AMAZON.HelpIntent", "samples": [] },
-        { "name": "AMAZON.NavigateHomeIntent", "samples": [] },
-        { "name": "AMAZON.FallbackIntent", "samples": [] }
+        {
+          "name": "StartGameIntent",
+          "slots": [],
+          "samples": [
+            "starte das spiel",
+            "spiel starten",
+            "starte doom",
+            "doom spielen",
+            "los geht es"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
       ],
       "types": []
     }

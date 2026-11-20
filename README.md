@@ -1,7 +1,9 @@
 # echo-show-doom
 
-Doom (shareware episode) running locally on an Amazon Echo Show as WebAssembly, inside a custom Alexa skill
-built with the **Alexa Web API for Games**. Started with "Alexa, open Doom" / "Alexa, öffne Doom".
+Doom (shareware episode) running natively on an Amazon Echo Show's own CPU as WebAssembly, inside a custom Alexa
+skill built with the **Alexa Web API for Games**. No streaming: game logic, rendering and sound are computed by the
+Echo's built-in web view. A server on your PC only delivers the files (about 4.5 MB, once) and answers the skill
+requests. Started with "Alexa, open Doom" / "Alexa, öffne Doom" (the skill has all 17 Alexa locales, see [Languages](#languages)).
 No jailbreak, only official means. A fun and blog project, development mode only, not for the skill store.
 
 **Status: step 4 of 5.** Doom runs on the Echo Show via the skill, with multitouch controls and an FPS/CPU
@@ -46,6 +48,28 @@ The server starts a quick tunnel, writes the URL into `skill-package\skill.json`
 The first deploy creates the skill "Doom" in your developer account and enables it for testing (development stage).
 Wait for `[skill] Deploy done`, then "Alexa, öffne Doom" / "Alexa, open Doom". Every 30 s a `PROBE REPORT`
 with fps, frame gaps and `tickGame` CPU time appears in the console (also saved in `reports\`).
+
+### Languages
+
+The skill is set up for all 17 locales Amazon lists for custom skills: ar-SA, de-DE, en-AU, en-CA, en-GB, en-IN,
+en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, nl-NL, pt-BR. Use the language your Echo is set to:
+
+| Language | Say |
+|---|---|
+| English | "Alexa, open Doom" |
+| German | "Alexa, öffne Doom" |
+| French | "Alexa, ouvre Doom" |
+| Spanish | "Alexa, abre Doom" |
+| Italian | "Alexa, apri Doom" |
+| Portuguese (BR) | "Alexa, abra Doom" |
+| Dutch | "Alexa, open Doom" |
+| Japanese | 「アレクサ、ドゥームを開いて」 (invocation name ドゥーム) |
+| Hindi | "Alexa, doom खोलो" |
+| Arabic | «أليكسا، افتحي دوم» (invocation name دوم) |
+
+Only de-DE has been tried on a real Echo Show. Amazon's Web API for Games docs don't say whether the web view is
+available in every marketplace; if your device doesn't report `Alexa.Presentation.HTML`, the skill says so and exits.
+The non-English and non-German texts are machine translations.
 
 ### Touch controls
 

@@ -62,12 +62,22 @@ function log(...a) { console.log(`[${new Date().toLocaleTimeString()}]`, ...a); 
 function alexaResponse(response) {
   return { version: '1.0', sessionAttributes: {}, response };
 }
+// Keyed by language; say() falls back to English. One entry per language of the skill's 17 locales.
 const SPEECH = {
   en: { start: 'Starting Doom.', stop: 'Bye.', noScreen: 'This needs an Echo device with a screen.', help: 'This skill runs Doom on your Echo Show. Say stop to end it.', error: 'Something went wrong.' },
   de: { start: 'Doom startet.', stop: 'Tschüss.', noScreen: 'Dafür brauche ich ein Echo Gerät mit Bildschirm.', help: 'Dieser Skill startet Doom auf deinem Echo Show. Sag stopp zum Beenden.', error: 'Da ist etwas schiefgegangen.' },
+  fr: { start: 'Doom démarre.', stop: 'Au revoir.', noScreen: 'Il faut un appareil Echo avec écran.', help: 'Cette skill lance Doom sur ton Echo Show. Dis stop pour quitter.', error: 'Une erreur s\'est produite.' },
+  es: { start: 'Iniciando Doom.', stop: 'Adiós.', noScreen: 'Para esto necesitas un dispositivo Echo con pantalla.', help: 'Esta skill ejecuta Doom en tu Echo Show. Di para para salir.', error: 'Algo salió mal.' },
+  it: { start: 'Avvio Doom.', stop: 'Ciao.', noScreen: 'Serve un dispositivo Echo con schermo.', help: 'Questa skill avvia Doom sul tuo Echo Show. Di stop per uscire.', error: 'Qualcosa è andato storto.' },
+  pt: { start: 'Iniciando Doom.', stop: 'Tchau.', noScreen: 'Para isso é preciso um dispositivo Echo com tela.', help: 'Esta skill executa Doom no seu Echo Show. Diga parar para sair.', error: 'Algo deu errado.' },
+  nl: { start: 'Doom start.', stop: 'Doei.', noScreen: 'Hiervoor heb je een Echo-apparaat met scherm nodig.', help: 'Deze skill start Doom op je Echo Show. Zeg stop om te stoppen.', error: 'Er ging iets mis.' },
+  ja: { start: 'ドゥームを起動します。', stop: 'さようなら。', noScreen: '画面付きのEchoデバイスが必要です。', help: 'このスキルはEcho Showでドゥームを動かします。終了するには、ストップと言ってください。', error: 'エラーが発生しました。' },
+  hi: { start: 'Doom शुरू हो रहा है।', stop: 'अलविदा।', noScreen: 'इसके लिए स्क्रीन वाला Echo डिवाइस चाहिए।', help: 'यह skill आपके Echo Show पर Doom चलाती है। बंद करने के लिए stop बोलें।', error: 'कुछ गड़बड़ हो गई।' },
+  ar: { start: 'جاري تشغيل دوم.', stop: 'مع السلامة.', noScreen: 'تحتاج إلى جهاز Echo بشاشة.', help: 'هذه المهارة تشغل دوم على جهاز Echo Show. قل توقف للخروج.', error: 'حدث خطأ ما.' },
 };
 function say(locale, key) {
-  return { type: 'PlainText', text: SPEECH[String(locale || '').startsWith('de') ? 'de' : 'en'][key] };
+  const lang = String(locale || '').split('-')[0];
+  return { type: 'PlainText', text: (SPEECH[lang] || SPEECH.en)[key] };
 }
 
 function startDirective(host) {
@@ -147,7 +157,7 @@ function autoDeploy() {
   dep.on('error', (e) => console.error(`[skill] ask CLI not found (${e.message}). Run "ask deploy --ignore-hash" yourself.`));
   dep.on('exit', (code) => {
     const sec = Math.round((Date.now() - t0) / 1000);
-    if (code === 0) log(`[skill] Deploy done after ${sec} s. Say "Alexa, öffne Doom" / "Alexa, open Doom".`);
+    if (code === 0) log(`[skill] Deploy done after ${sec} s. Say "Alexa, öffne Doom" / "Alexa, open Doom" (other languages: README).`);
     else {
       console.error(`\n[skill] Deploy FAILED (code ${code}). Last output:`);
       console.error(out.trim().split(/\r?\n/).slice(-15).join('\n'));

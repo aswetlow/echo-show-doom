@@ -1,0 +1,41 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "ドゥーム",
+      "intents": [
+        {
+          "name": "StartGameIntent",
+          "slots": [],
+          "samples": [
+            "ゲームを始めて",
+            "ゲームをスタート",
+            "ドゥームを始めて",
+            "ドゥームで遊ぶ",
+            "スタート"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
+      ],
+      "types": []
+    }
+  }
+}

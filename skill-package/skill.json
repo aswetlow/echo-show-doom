@@ -2,25 +2,157 @@
   "manifest": {
     "publishingInformation": {
       "locales": {
-        "de-DE": {
-          "name": "Doom",
-          "summary": "Doom (Shareware) als WebAssembly auf dem Echo Show.",
-          "description": "Spaß- und Blogprojekt: Doom läuft als WebAssembly im Web-API-for-Games-Webview. Nur für den Entwicklungsmodus.",
-          "examplePhrases": ["Alexa, öffne Doom"],
-          "keywords": []
-        },
         "en-US": {
           "name": "Doom",
           "summary": "Doom (shareware) as WebAssembly on the Echo Show.",
           "description": "Fun and blog project: Doom runs as WebAssembly in the Web API for Games web view. Development mode only.",
-          "examplePhrases": ["Alexa, open Doom"],
+          "examplePhrases": [
+            "Alexa, open Doom"
+          ],
           "keywords": []
         },
         "en-GB": {
           "name": "Doom",
           "summary": "Doom (shareware) as WebAssembly on the Echo Show.",
           "description": "Fun and blog project: Doom runs as WebAssembly in the Web API for Games web view. Development mode only.",
-          "examplePhrases": ["Alexa, open Doom"],
+          "examplePhrases": [
+            "Alexa, open Doom"
+          ],
+          "keywords": []
+        },
+        "en-AU": {
+          "name": "Doom",
+          "summary": "Doom (shareware) as WebAssembly on the Echo Show.",
+          "description": "Fun and blog project: Doom runs as WebAssembly in the Web API for Games web view. Development mode only.",
+          "examplePhrases": [
+            "Alexa, open Doom"
+          ],
+          "keywords": []
+        },
+        "en-CA": {
+          "name": "Doom",
+          "summary": "Doom (shareware) as WebAssembly on the Echo Show.",
+          "description": "Fun and blog project: Doom runs as WebAssembly in the Web API for Games web view. Development mode only.",
+          "examplePhrases": [
+            "Alexa, open Doom"
+          ],
+          "keywords": []
+        },
+        "en-IN": {
+          "name": "Doom",
+          "summary": "Doom (shareware) as WebAssembly on the Echo Show.",
+          "description": "Fun and blog project: Doom runs as WebAssembly in the Web API for Games web view. Development mode only.",
+          "examplePhrases": [
+            "Alexa, open Doom"
+          ],
+          "keywords": []
+        },
+        "de-DE": {
+          "name": "Doom",
+          "summary": "Doom (Shareware) als WebAssembly auf dem Echo Show.",
+          "description": "Spaß- und Blogprojekt: Doom läuft als WebAssembly im Web-API-for-Games-Webview. Nur für den Entwicklungsmodus.",
+          "examplePhrases": [
+            "Alexa, öffne Doom"
+          ],
+          "keywords": []
+        },
+        "fr-FR": {
+          "name": "Doom",
+          "summary": "Doom (shareware) en WebAssembly sur l'Echo Show.",
+          "description": "Projet pour le fun et le blog : Doom tourne en WebAssembly dans la vue web de la Web API for Games. Mode développement uniquement.",
+          "examplePhrases": [
+            "Alexa, ouvre Doom"
+          ],
+          "keywords": []
+        },
+        "fr-CA": {
+          "name": "Doom",
+          "summary": "Doom (shareware) en WebAssembly sur l'Echo Show.",
+          "description": "Projet pour le fun et le blog : Doom tourne en WebAssembly dans la vue web de la Web API for Games. Mode développement uniquement.",
+          "examplePhrases": [
+            "Alexa, ouvre Doom"
+          ],
+          "keywords": []
+        },
+        "es-ES": {
+          "name": "Doom",
+          "summary": "Doom (shareware) en WebAssembly en el Echo Show.",
+          "description": "Proyecto por diversión y para el blog: Doom se ejecuta en WebAssembly en la vista web de la Web API for Games. Solo modo de desarrollo.",
+          "examplePhrases": [
+            "Alexa, abre Doom"
+          ],
+          "keywords": []
+        },
+        "es-MX": {
+          "name": "Doom",
+          "summary": "Doom (shareware) en WebAssembly en el Echo Show.",
+          "description": "Proyecto por diversión y para el blog: Doom se ejecuta en WebAssembly en la vista web de la Web API for Games. Solo modo de desarrollo.",
+          "examplePhrases": [
+            "Alexa, abre Doom"
+          ],
+          "keywords": []
+        },
+        "es-US": {
+          "name": "Doom",
+          "summary": "Doom (shareware) en WebAssembly en el Echo Show.",
+          "description": "Proyecto por diversión y para el blog: Doom se ejecuta en WebAssembly en la vista web de la Web API for Games. Solo modo de desarrollo.",
+          "examplePhrases": [
+            "Alexa, abre Doom"
+          ],
+          "keywords": []
+        },
+        "it-IT": {
+          "name": "Doom",
+          "summary": "Doom (shareware) in WebAssembly sull'Echo Show.",
+          "description": "Progetto per divertimento e per il blog: Doom gira in WebAssembly nella web view della Web API for Games. Solo modalità sviluppo.",
+          "examplePhrases": [
+            "Alexa, apri Doom"
+          ],
+          "keywords": []
+        },
+        "pt-BR": {
+          "name": "Doom",
+          "summary": "Doom (shareware) em WebAssembly no Echo Show.",
+          "description": "Projeto por diversão e para o blog: Doom roda em WebAssembly na web view da Web API for Games. Somente modo de desenvolvimento.",
+          "examplePhrases": [
+            "Alexa, abra Doom"
+          ],
+          "keywords": []
+        },
+        "nl-NL": {
+          "name": "Doom",
+          "summary": "Doom (shareware) als WebAssembly op de Echo Show.",
+          "description": "Hobby- en blogproject: Doom draait als WebAssembly in de webview van de Web API for Games. Alleen ontwikkelmodus.",
+          "examplePhrases": [
+            "Alexa, open Doom"
+          ],
+          "keywords": []
+        },
+        "ja-JP": {
+          "name": "Doom",
+          "summary": "Echo ShowでWebAssemblyとして動くDoom（シェアウェア版）。",
+          "description": "趣味とブログのためのプロジェクト：DoomがWeb API for GamesのウェブビューでWebAssemblyとして動きます。開発モードのみ。",
+          "examplePhrases": [
+            "アレクサ、ドゥームを開いて"
+          ],
+          "keywords": []
+        },
+        "hi-IN": {
+          "name": "Doom",
+          "summary": "Echo Show पर WebAssembly में Doom (शेयरवेयर)।",
+          "description": "मज़े और ब्लॉग के लिए प्रोजेक्ट: Doom, Web API for Games के वेब व्यू में WebAssembly के रूप में चलता है। केवल डेवलपमेंट मोड।",
+          "examplePhrases": [
+            "Alexa, doom खोलो"
+          ],
+          "keywords": []
+        },
+        "ar-SA": {
+          "name": "Doom",
+          "summary": "لعبة Doom (النسخة التجريبية المجانية) بتقنية WebAssembly على Echo Show.",
+          "description": "مشروع للمتعة وللمدونة: تعمل Doom بتقنية WebAssembly داخل عرض الويب الخاص بـ Web API for Games. لوضع التطوير فقط.",
+          "examplePhrases": [
+            "أليكسا، افتحي دوم"
+          ],
           "keywords": []
         }
       },
@@ -35,7 +167,9 @@
           "sslCertificateType": "Wildcard"
         },
         "interfaces": [
-          { "type": "ALEXA_PRESENTATION_HTML" }
+          {
+            "type": "ALEXA_PRESENTATION_HTML"
+          }
         ]
       }
     },
