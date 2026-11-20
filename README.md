@@ -1,6 +1,5 @@
 
 
-https://github.com/user-attachments/assets/87e63a0f-95c3-4f0e-a8b2-d57ebc123b02
 
 # echo-show-doom
 
