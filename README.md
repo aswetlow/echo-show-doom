@@ -1,6 +1,3 @@
-
-
-
 # echo-show-doom
 
 Doom (shareware episode) running natively on an Amazon Echo Show's own CPU as WebAssembly, inside a custom Alexa
@@ -8,6 +5,12 @@ skill built with the **Alexa Web API for Games**. No streaming: game logic, rend
 Echo's built-in web view. A server on your PC only delivers the files (about 4.5 MB, once) and answers the skill
 requests. Started with "Alexa, open Doom" / "Alexa, öffne Doom" (the skill has all 17 Alexa locales, see [Languages](#languages)).
 No jailbreak, only official means. A fun and blog project, development mode only, not for the skill store.
+
+
+
+https://github.com/user-attachments/assets/fcc2509b-d700-4daf-89b7-6517f32fec38
+
+
 
 **Status:** Doom runs on the Echo Show via the skill, with multitouch controls and an FPS/CPU
 overlay that reports to the server console, and sound effects. Keyboard works on the desktop. No music.
