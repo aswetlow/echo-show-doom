@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/87e63a0f-95c3-4f0e-a8b2-d57ebc123b02
+
 # echo-show-doom
 
 Doom (shareware episode) running natively on an Amazon Echo Show's own CPU as WebAssembly, inside a custom Alexa
